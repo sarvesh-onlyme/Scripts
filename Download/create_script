@@ -1,0 +1,69 @@
+#!/bin/bash
+
+echo
+clear "Hello Sarvesh"
+
+read -p "Install apt-fast [Y/N]: " apt_fast
+read -p "Install Wingspanel [Y/N]: " wingspanel
+read -p "Install google-chrome [Y/N]: " chrome
+read -p "Install Community-PPA [Y/N]: " community
+read -p "Install Elementary Tweak [Y/N] " tweak
+read -p "Install Django [Y/N] " django
+read -p "Install Python-MySQL [Y/N] " py_mysql
+read -p "Install PostgresSql [Y/N] " postgresql
+read -p "Install PhppgAdmin [Y/N] " phppgadmin
+read -p "Install PhpmyAdmin [Y/N] " phpmyadmin
+
+if [ "$apt_fast" == "Y" ] || [ "$apt_fast" == "y" ]; then
+    sudo add-apt-repository ppa:apt-fast/stable
+    sudo apt-get update
+    sudo apt-get install apt-fast
+fi
+
+if [ "$wingspanel" == "Y" ] || [ "$wingspanel" == "y" ]; then
+    sudo apt-fast -y update
+    sudo apt-fast -y upgrade 
+    sudo apt-fast install -y wingpanel-slim
+fi
+
+if [ "$chrome" == "Y" ] || [ "$chrome" == "y" ]; then
+    sudo apt-fast -y install libxss1
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i google-chrome*.deb
+fi
+
+if [ "$community" == "Y" ] || [ "$community" == "y" ]; then
+    sudo apt-add-repository ppa:versable/elementary-update
+    sudo apt-fast -y update
+fi
+
+if [ "$tweak" == "Y" ] || [ "$tweak" == "y" ]; then
+    sudo apt-add-repository ppa:versable/elementary-update
+    sudo apt-fast -y update
+    sudo apt-fast install -y elementary-tweaks
+fi
+if [ "$django" == "Y" ] || [ "$django" == "y" ]; then
+    sudo apt-fast update
+    sudo apt-fast -y install apache2 libapache2-mod-wsgi
+    sudo apt-fast -y install python-setuptools
+    sudo apt-fast -y install python-pip
+    sudo pip install django
+fi
+if [ "$py_mysql" == "Y" ] || [ "$py_mysql" == "y" ]; then
+    sudo pip install mysql-python
+    sudo apt-fast -y install python-mysqldb
+fi
+if [ "$postgresql" == "Y" ] || [ "$postgresql" == "y" ]; then
+    sudo apt-fast -y install postgresql postgresql-contrib
+fi
+if [ "$phppgadmin" == "Y" ] || [ "$phppgadmin" == "y" ]; then
+    sudo apt-fast -y install phppgadmin
+fi
+if [ "$phpmyadmin" == "Y" ] || [ "$phpmyadmin" == "y" ]; then
+    sudo apt-fast -y install phpmyadmin
+fi
+if [ "$vlc" == "Y" ] || [ "$vlc" == "y" ]; then
+    sudo apt-fast -y install vlc browser-plugin-vlc
+fi
+#And other scripts here!
+#Run it with "bash create_script"
